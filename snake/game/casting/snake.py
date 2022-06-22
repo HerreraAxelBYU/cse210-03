@@ -56,7 +56,7 @@ class Snake(Actor):
         y = int(constants.MAX_Y / 2)
 
         for i in range(constants.SNAKE_LENGTH):
-            position = Point(250 - i * constants.CELL_SIZE, y)
+            position = Point(300 - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "#"
             color = constants.RED if i == 0 else constants.RED

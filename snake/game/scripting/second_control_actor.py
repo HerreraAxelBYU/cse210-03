@@ -48,5 +48,5 @@ class SecondControlActorsAction(Action):
     
 
 
-        second_snake = cast.get_first_actor("second_snake")
+        second_snake = cast.get_first_actor("snakess")
         second_snake.turn_head(self._direction)

@@ -6,6 +6,7 @@ from game.casting.players import PlayerTwo
 from game.casting.score import Score
 from game.casting.score import Score2
 from game.scripting.script import Script
+from game.scripting.control_actors_action import ResetActorPositions
 from game.scripting.control_actors_action import ControlActorPlayerOne
 from game.scripting.control_actors_action import ControlActorPlayerTwo
 from game.scripting.move_actors_action import MoveActorsAction
@@ -35,6 +36,7 @@ def main():
     script = Script()
     script.add_action("input", ControlActorPlayerOne(keyboard_service))
     script.add_action("input", ControlActorPlayerTwo(keyboard_service))
+    script.add_action("input", ResetActorPositions(keyboard_service))
     script.add_action("update", MoveActorsAction())
 
     script.add_action("update", HandleCollisionsAction())

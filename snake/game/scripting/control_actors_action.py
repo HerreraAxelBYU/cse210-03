@@ -71,3 +71,16 @@ class ControlActorPlayerTwo(ControlActorsAction):
 
         player_two = cast.get_first_actor("playertwo")
         player_two.turn_head(self._direction)
+
+
+class ResetActorPositions(ControlActorsAction):
+    """ 
+    Reset the positions of both players when pressing 'space'.
+    """
+
+    def execute(self, cast, script):
+        
+        if self._keyboard_service.is_key_down('space'):
+
+            player_one = cast.get_first_actor("playerone")
+            player_one.grow_trail(1)

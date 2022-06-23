@@ -1,12 +1,11 @@
 import constants
 
 from game.casting.cast import Cast
-from game.casting.food import Food
-from game.casting.playerone import PlayerOne
-from game.casting.playertwo import PlayerTwo
-from game.casting.snake import Snake
+from game.casting.players import PlayerOne
+from game.casting.players import PlayerTwo
 from game.scripting.script import Script
-from game.scripting.control_actors_action import ControlActorsAction
+from game.scripting.control_actors_action import ControlActorPlayerOne
+from game.scripting.control_actors_action import ControlActorPlayerTwo
 from game.scripting.move_actors_action import MoveActorsAction
 from game.scripting.handle_collisions_action import HandleCollisionsAction
 from game.scripting.draw_actors_action import DrawActorsAction
@@ -15,17 +14,12 @@ from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
 from game.shared.color import Color
 from game.shared.point import Point
-from game.casting.snake2 import Snake2
-from game.scripting.second_control_actor import SecondControlActorsAction
 
 
 def main():
     
     # create the cast
     cast = Cast()
-    cast.add_actor("foods", Food())
-    cast.add_actor("snakes", Snake())
-    cast.add_actor("snakess", Snake2())
     cast.add_actor("playerone", PlayerOne())
     cast.add_actor("playertwo", PlayerTwo())
     
@@ -35,8 +29,8 @@ def main():
     video_service = VideoService()
 
     script = Script()
-    script.add_action("input", ControlActorsAction(keyboard_service))
-    script.add_action("input", SecondControlActorsAction(keyboard_service))
+    script.add_action("input", ControlActorPlayerOne(keyboard_service))
+    script.add_action("input", ControlActorPlayerTwo(keyboard_service))
     script.add_action("update", MoveActorsAction())
 
     script.add_action("update", HandleCollisionsAction())

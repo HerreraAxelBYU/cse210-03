@@ -29,12 +29,12 @@ class AllPlayers(Actor):
     def get_head(self):
         return self._segments[0]
 
-    def grow_tail(self, number_of_segments):
+    def grow_trail(self, number_of_segments):
         for i in range(number_of_segments):
-            tail = self._segments[-1]
-            velocity = tail.get_velocity()
+            trail = self._segments[-1]
+            velocity = trail.get_velocity()
             offset = velocity.reverse()
-            position = tail.get_position().add(offset)
+            position = trail.get_position().add(offset)
             
             segment = Actor()
             segment.set_position(position)
@@ -50,7 +50,7 @@ class AllPlayers(Actor):
         x = int(constants.MAX_X / 2)
         y = int(constants.MAX_Y / 2)
 
-        for i in range(constants.SNAKE_LENGTH):
+        for i in range(constants.MIN_TRAIL_LENGTH):
             position = Point(300 - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "+"

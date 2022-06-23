@@ -18,6 +18,8 @@ class HandleCollisionsAction(Action):
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
         self._is_game_over = False
+        self._p1_victory = False
+        self._p2_victory = False
 
     def execute(self, cast, script):
         """Executes the handle collisions action.
@@ -44,14 +46,15 @@ class HandleCollisionsAction(Action):
         p2_bike = playertwo.get_segments()[0]
         p2_segments = playertwo.get_segments()[1:]
         
-        
         for segment in p1_segments:
             if p1_bike.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                self._p2_victory = True
 
         for segment in p2_segments:
             if p2_bike.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                self._p1_victory = True
 
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
@@ -74,7 +77,12 @@ class HandleCollisionsAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            for segment in p1_all_segments:
-                segment.set_color(constants.WHITE)
-            for segment in p2_all_segments:
-                segment.set_color(constants.WHITE)
+            if self._p1_victory == True:
+                message.set_text("Player One Wins!")
+                for segment in p2_all_segments:
+                    segment.set_color(constants.WHITE)
+
+            elif self._p2_victory == True:
+                message.set_text("Player Two Wins!")
+                for segment in p1_all_segments:
+                    segment.set_color(constants.WHITE)

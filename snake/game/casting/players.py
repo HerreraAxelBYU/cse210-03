@@ -74,7 +74,7 @@ class PlayerOne(AllPlayers):
         self.set_text("Player One")
         self.set_color(constants.RED)
         self.set_position(position)
-        self._font_size = 20
+        self._font_size = 17
 
         def _prepare_body(self):
             x = int(constants.MAX_X / 2)
@@ -104,7 +104,7 @@ class PlayerTwo(AllPlayers):
         self.set_text("Player Two")
         self.set_color(constants.GREEN)
         self.set_position(position)
-        self._font_size = 20
+        self._font_size = 17
     
     def _prepare_body(self):
         x = int(constants.MAX_X / 2)

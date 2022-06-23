@@ -74,6 +74,8 @@ class HandleCollisionsAction(Action):
             p1_all_segments = playerone.get_segments()
             playertwo = cast.get_first_actor("playertwo")
             p2_all_segments = playertwo.get_segments()
+            score1 = cast.get_first_actor("score1")
+            score2 = cast.get_first_actor("score2")
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -85,11 +87,14 @@ class HandleCollisionsAction(Action):
             cast.add_actor("messages", message)
 
             if self._p1_victory == True:
+                score1.add_points(1)
                 message.set_text("Player One Wins!")
                 for segment in p2_all_segments:
+                    
                     segment.set_color(constants.WHITE)
 
             elif self._p2_victory == True:
+                score2.add_points(1)
                 message.set_text("Player Two Wins!")
                 for segment in p1_all_segments:
                     segment.set_color(constants.WHITE)

@@ -3,6 +3,8 @@ import constants
 from game.casting.cast import Cast
 from game.casting.players import PlayerOne
 from game.casting.players import PlayerTwo
+from game.casting.score import Score
+from game.casting.score import Score2
 from game.scripting.script import Script
 from game.scripting.control_actors_action import ControlActorPlayerOne
 from game.scripting.control_actors_action import ControlActorPlayerTwo
@@ -20,9 +22,11 @@ def main():
     
     # create the cast
     cast = Cast()
+
     cast.add_actor("playerone", PlayerOne())
     cast.add_actor("playertwo", PlayerTwo())
-    
+    cast.add_actor("score1", Score())
+    cast.add_actor("score2", Score2())
    
     # start the game
     keyboard_service = KeyboardService()

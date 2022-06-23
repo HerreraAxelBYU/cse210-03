@@ -45,21 +45,21 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        snake = cast.get_first_actor("snakes")
-        head = snake.get_segments()[0]
-        segments = snake.get_segments()[1:]
+        playerone = cast.get_first_actor("playerone")
+        p1_bike = playerone.get_segments()[0]
+        p1_segments = playerone.get_segments()[1:]
 
-        second_snake = cast.get_first_actor("snakess")
-        second_head = second_snake.get_segments()[0]
-        second_segments = second_snake.get_segments()[1:]
+        playertwo = cast.get_first_actor("playertwo")
+        p2_bike = playertwo.get_segments()[0]
+        p2_segments = playertwo.get_segments()[1:]
         
         
-        for segment in second_segments:
-            if head.get_position().equals(segment.get_position()):
+        for segment in p1_segments:
+            if p1_bike.get_position().equals(segment.get_position()):
                 self._is_game_over = True
 
-        for second_segment in segments:
-            if second_head.get_position().equals(second_segment.get_position()):
+        for segment in p2_segments:
+            if p2_bike.get_position().equals(segment.get_position()):
                 self._is_game_over = True
 
     def _handle_game_over(self, cast):
@@ -69,9 +69,10 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         if self._is_game_over:
-            snake = cast.get_first_actor("snakes")
-            segments = snake.get_segments()
-            food = cast.get_first_actor("foods")
+            playerone = cast.get_first_actor("playerone")
+            p1_all_segments = playerone.get_segments()
+            playertwo = cast.get_first_actor("playertwo")
+            p2_all_segments = playertwo.get_segments()
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -82,6 +83,7 @@ class HandleCollisionsAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            for segment in segments:
+            for segment in p1_all_segments:
                 segment.set_color(constants.WHITE)
-            food.set_color(constants.WHITE)
+            for segment in p2_all_segments:
+                segment.set_color(constants.WHITE)

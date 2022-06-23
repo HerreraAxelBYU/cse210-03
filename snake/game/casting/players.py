@@ -1,16 +1,11 @@
+from turtle import position
 import constants
 from game.casting.actor import Actor
+from game.shared.color import Color
 from game.shared.point import Point
 
-
-class Snake(Actor):
-    """
-    A long limbless reptile.
-    
-    The responsibility of Snake is to move itself.
-
-    Attributes:
-        _points (int): The number of points the food is worth.
+class AllPlayers(Actor):
+    """The parent class for all players. Contains the code for the trail segments.
     """
     def __init__(self):
         super().__init__()
@@ -44,7 +39,7 @@ class Snake(Actor):
             segment = Actor()
             segment.set_position(position)
             segment.set_velocity(velocity)
-            segment.set_text("#")
+            segment.set_text("+")
             segment.set_color(constants.RED)
             self._segments.append(segment)
 
@@ -58,8 +53,8 @@ class Snake(Actor):
         for i in range(constants.SNAKE_LENGTH):
             position = Point(300 - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
-            text = "8" if i == 0 else "#"
-            color = constants.RED if i == 0 else constants.RED
+            text = "8" if i == 0 else "+"
+            color = constants.WHITE if i == 0 else constants.RED
             
             segment = Actor()
             segment.set_position(position)
@@ -67,3 +62,31 @@ class Snake(Actor):
             segment.set_text(text)
             segment.set_color(color)
             self._segments.append(segment)
+
+class PlayerOne(AllPlayers):
+    """The player on the left screen who moves with 'WASD'.
+    """
+    def __init__(self):
+        super().__init__()
+
+        red = Color(255, 0, 0)
+        position = Point(200, 0)
+
+        self.set_text("Player One")
+        self.set_color(red)
+        self.set_position(position)
+        self._font_size = 20
+
+class PlayerTwo(AllPlayers):
+    """The player on the right screen who moves with 'IJKL'.
+    """
+    def __init__(self):
+        super().__init__()
+
+        green = Color(0, 255, 0)
+        position = Point(600, 0)
+
+        self.set_text("Player Two")
+        self.set_color(green)
+        self.set_position(position)
+        self._font_size = 20

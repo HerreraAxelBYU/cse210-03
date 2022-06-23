@@ -68,6 +68,6 @@ class ControlActorPlayerTwo(ControlActorsAction):
         # down
         if self._keyboard_service.is_key_down('k'):
             self._direction = Point(0, constants.CELL_SIZE)
-    
+
         player_two = cast.get_first_actor("playertwo")
         player_two.turn_head(self._direction)

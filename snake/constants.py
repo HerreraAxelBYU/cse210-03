@@ -8,9 +8,28 @@ MAX_X = 900
 MAX_Y = 600
 FRAME_RATE = 15
 FONT_SIZE = 15
-CAPTION = "Snake"
-SNAKE_LENGTH = 8
+CAPTION = "CYCLES"
+MIN_TRAIL_LENGTH = 12
+MAX_TRAIL_LENGTH = 15
+
+# ===== Colors =====
 WHITE = Color(255, 255, 255)
+GRAY = Color(131,139,139)
+BLACK = Color(30,30,30)
+
 RED = Color(255, 0, 0)
 YELLOW = Color(255, 255, 0)
 GREEN = Color(0, 255, 0)
+BLUE = Color(0,0,255)
+
+ORANGE = Color(255,128,0)
+PURPLE = Color(125,38,205)
+LIME = Color(192,255,62)
+PINK = Color(255,105,180)
+BROWN = Color(160,82,45)
+CYAN = Color(0,245,255)
+TEAL = Color(0,128,128)
+
+BRONZE = Color(255,160,122)
+SILVER = Color(238,233,233)
+GOLD = Color(255,193,37)

@@ -27,17 +27,8 @@ class HandleCollisionsAction(Action):
             script (Script): The script of Actions in the game.
         """
         if not self._is_game_over:
-            self._handle_food_collision(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
-
-    def _handle_food_collision(self, cast):
-        """Updates the score nd moves the food if the snake collides with the food.
-        
-        Args:
-            cast (Cast): The cast of Actors in the game.
-        """
-        
     
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the snake collides with one of its segments.

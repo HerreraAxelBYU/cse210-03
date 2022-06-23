@@ -1,3 +1,12 @@
+## TEAM to do list:
+```
+[] Make playerone and playertwo seperate entities.
+[] Add a reset button so player's can play another round.
+[] Allow both players to collision into eachother.
+[] Rename 'snake' folder to 'cycle' without messing up all the existing code.
+```
+---
+
 # cse210-03
 Assignment for Week 10 - Team Code Submission - Cycle
 
@@ -36,7 +45,6 @@ root                    (project root folder)
 
 ## Authors
 --- Herrera Axel
---- Jordan Eldredge
+--- Jordan Eldredge, jordanmeldredge@gmail.com
 --- Jonathan Troche
 --- Igor
-* TODO: Add your name and email here

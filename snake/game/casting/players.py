@@ -54,7 +54,7 @@ class AllPlayers(Actor):
             position = Point(300 - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "+"
-            color = constants.WHITE if i == 0 else constants.RED
+            color = constants.RED if i == 0 else constants.RED
             
             segment = Actor()
             segment.set_position(position)
@@ -69,13 +69,29 @@ class PlayerOne(AllPlayers):
     def __init__(self):
         super().__init__()
 
-        red = Color(255, 0, 0)
         position = Point(200, 0)
 
         self.set_text("Player One")
-        self.set_color(red)
+        self.set_color(constants.RED)
         self.set_position(position)
         self._font_size = 20
+
+        def _prepare_body(self):
+            x = int(constants.MAX_X / 2)
+            y = int(constants.MAX_Y / 2)
+
+            for i in range(constants.MIN_TRAIL_LENGTH):
+                position = Point(200 - i * x, constants.CELL_SIZE, y)
+                velocity = Point(1 * constants.CELL_SIZE, 0)
+                text = "8" if i == 0 else "+"
+                color = constants.RED if i == 0 else constants.RED
+                
+                segment = Actor()
+                segment.set_position(position)
+                segment.set_velocity(velocity)
+                segment.set_text(text)
+                segment.set_color(color)
+                self._segments.append(segment)
 
 class PlayerTwo(AllPlayers):
     """The player on the right screen who moves with 'IJKL'.
@@ -83,10 +99,26 @@ class PlayerTwo(AllPlayers):
     def __init__(self):
         super().__init__()
 
-        green = Color(0, 255, 0)
         position = Point(600, 0)
 
         self.set_text("Player Two")
-        self.set_color(green)
+        self.set_color(constants.GREEN)
         self.set_position(position)
         self._font_size = 20
+    
+    def _prepare_body(self):
+        x = int(constants.MAX_X / 2)
+        y = int(constants.MAX_Y / 2)
+
+        for i in range(constants.MIN_TRAIL_LENGTH):
+            position = Point(600 - i * constants.CELL_SIZE, y)
+            velocity = Point(1 * constants.CELL_SIZE, 0)
+            text = "8" if i == 0 else "+"
+            color = constants.GREEN if i == 0 else constants.GREEN
+            
+            segment = Actor()
+            segment.set_position(position)
+            segment.set_velocity(velocity)
+            segment.set_text(text)
+            segment.set_color(color)
+            self._segments.append(segment)

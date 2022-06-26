@@ -38,28 +38,28 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        playerone = cast.get_first_actor("playerone")
-        p1_bike = playerone.get_segments()[0]
-        p1_segments = playerone.get_segments()[1:]
+        p1 = cast.get_first_actor("player_1")
+        p1_cycle = p1.get_segments()[0]
+        p1_segments = p1.get_segments()[1:]
 
-        playertwo = cast.get_first_actor("playertwo")
-        p2_bike = playertwo.get_segments()[0]
-        p2_segments = playertwo.get_segments()[1:]
+        p2 = cast.get_first_actor("player_2")
+        p2_cycle = p2.get_segments()[0]
+        p2_segments = p2.get_segments()[1:]
         
         # If Player One collides with itself or with Player Two...
         for segment in p1_segments:
-            if p1_bike.get_position().equals(segment.get_position()):
+            if p1_cycle.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 self._p2_victory = True
-            if p2_bike.get_position().equals(segment.get_position()):
+            if p2_cycle.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 self._p1_victory = True
         # If Player Two collides with itself or with Player One...
         for segment in p2_segments:
-            if p2_bike.get_position().equals(segment.get_position()):
+            if p2_cycle.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 self._p1_victory = True
-            if p1_bike.get_position().equals(segment.get_position()):
+            if p1_cycle.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 self._p2_victory = True
 
@@ -70,12 +70,12 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         if self._is_game_over:
-            playerone = cast.get_first_actor("playerone")
-            p1_all_segments = playerone.get_segments()
-            playertwo = cast.get_first_actor("playertwo")
-            p2_all_segments = playertwo.get_segments()
-            score1 = cast.get_first_actor("score1")
-            score2 = cast.get_first_actor("score2")
+            player_1 = cast.get_first_actor("player_1")
+            p1_all_segments = player_1.get_segments()
+            player_2 = cast.get_first_actor("player_2")
+            p2_all_segments = player_2.get_segments()
+            score1 = cast.get_first_actor("score_1")
+            score2 = cast.get_first_actor("score_2")
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -87,14 +87,15 @@ class HandleCollisionsAction(Action):
             cast.add_actor("messages", message)
 
             if self._p1_victory == True:
-                score1.add_points(1)
+                score1._add_points(1)
                 message.set_text("Player One Wins!")
                 for segment in p2_all_segments:
-                    
                     segment.set_color(constants.WHITE)
-
+                    
             elif self._p2_victory == True:
-                score2.add_points(1)
+                score2._add_points(1)
                 message.set_text("Player Two Wins!")
                 for segment in p1_all_segments:
                     segment.set_color(constants.WHITE)
+
+

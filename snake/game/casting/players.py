@@ -4,13 +4,18 @@ from game.casting.actor import Actor
 from game.shared.color import Color
 from game.shared.point import Point
 
-class AllPlayers(Actor):
-    """The parent class for all players. Contains the code for the trail segments.
+class Players(Actor):
+    """An instance of a Players class. Contains the code for the trail segments.
     """
     def __init__(self):
         super().__init__()
+        x = int(constants.MAX_X / 2)
+        y = int(constants.MAX_Y / 2)
+        self._crashed = False
         self._segments = []
-        self._prepare_body()
+        self._color = constants.BLACK
+        self._start_position = Point(x, y)
+        self._position = Point(x, y)
 
     def get_segments(self):
         return self._segments
@@ -30,91 +35,42 @@ class AllPlayers(Actor):
         return self._segments[0]
 
     def grow_trail(self, number_of_segments):
-        for i in range(number_of_segments):
-            trail = self._segments[-1]
-            velocity = trail.get_velocity()
-            offset = velocity.reverse()
-            position = trail.get_position().add(offset)
-            
-            segment = Actor()
-            segment.set_position(position)
-            segment.set_velocity(velocity)
-            segment.set_text("+")
-            segment.set_color(constants.RED)
-            self._segments.append(segment)
-
-    def turn_head(self, velocity):
-        self._segments[0].set_velocity(velocity)
-    
-    def _prepare_body(self):
-        x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
-
-        for i in range(constants.MIN_TRAIL_LENGTH):
-            position = Point(300 - i * constants.CELL_SIZE, y)
-            velocity = Point(1 * constants.CELL_SIZE, 0)
-            text = "8" if i == 0 else "+"
-            color = constants.RED if i == 0 else constants.RED
-            
-            segment = Actor()
-            segment.set_position(position)
-            segment.set_velocity(velocity)
-            segment.set_text(text)
-            segment.set_color(color)
-            self._segments.append(segment)
-
-class PlayerOne(AllPlayers):
-    """The player on the left screen who moves with 'WASD'.
-    """
-    def __init__(self):
-        super().__init__()
-
-        position = Point(200, 0)
-
-        self.set_text("Player One")
-        self.set_color(constants.RED)
-        self.set_position(position)
-        self._font_size = 17
-
-        def _prepare_body(self):
-            x = int(constants.MAX_X / 2)
-            y = int(constants.MAX_Y / 2)
-
-            for i in range(constants.MIN_TRAIL_LENGTH):
-                position = Point(200 - i * x, constants.CELL_SIZE, y)
-                velocity = Point(1 * constants.CELL_SIZE, 0)
-                text = "8" if i == 0 else "+"
-                color = constants.RED if i == 0 else constants.RED
+        if self._crashed == False:
+            for i in range(number_of_segments):
+                trail = self._segments[-1]
+                velocity = trail.get_velocity()
+                offset = velocity.reverse()
+                position = trail.get_position().add(offset)
                 
                 segment = Actor()
                 segment.set_position(position)
                 segment.set_velocity(velocity)
-                segment.set_text(text)
-                segment.set_color(color)
+                segment.set_text("+")
+                segment.set_color(self._color)
                 self._segments.append(segment)
 
-class PlayerTwo(AllPlayers):
-    """The player on the right screen who moves with 'IJKL'.
-    """
-    def __init__(self):
-        super().__init__()
+    def shrink_trail(self, number_of_segments):
+        for i in range(number_of_segments):
+            self._segments.pop()
 
-        position = Point(600, 0)
-
-        self.set_text("Player Two")
-        self.set_color(constants.GREEN)
-        self.set_position(position)
-        self._font_size = 17
+    def turn_head(self, velocity):
+        self._segments[0].set_velocity(velocity)
     
-    def _prepare_body(self):
-        x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
+    def _prepare_body(self, pos_x, pos_y, set_color):
+        """Create the body of the cycle.
+        Arg:
+            pos_x = The x position of the object.  
+            pos_y = The y position of the object.    
+            color = The color of the object.
+        """
+        self._color = set_color
+        self._start_position = Point(pos_x, pos_y)
 
         for i in range(constants.MIN_TRAIL_LENGTH):
-            position = Point(600 - i * constants.CELL_SIZE, y)
+            position = Point(pos_x - i * constants.CELL_SIZE, pos_y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "+"
-            color = constants.GREEN if i == 0 else constants.GREEN
+            color = set_color if i == 0 else set_color
             
             segment = Actor()
             segment.set_position(position)
@@ -122,3 +78,6 @@ class PlayerTwo(AllPlayers):
             segment.set_text(text)
             segment.set_color(color)
             self._segments.append(segment)
+
+    def get_start_position(self):
+        return self._start_position

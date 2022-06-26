@@ -15,17 +15,21 @@ class KeyboardService:
         """Constructs a new KeyboardService."""
         self._keys = {}
         
-        self._keys['w'] = pyray.KEY_W
-        self._keys['a'] = pyray.KEY_A
-        self._keys['s'] = pyray.KEY_S
-        self._keys['d'] = pyray.KEY_D
+        self._keys['w'] = pyray.KEY_W # P1 - Up
+        self._keys['a'] = pyray.KEY_A # P1 - Left
+        self._keys['s'] = pyray.KEY_S # P1 - Down
+        self._keys['d'] = pyray.KEY_D # P1 - Right 
 
-        self._keys['i'] = pyray.KEY_I
-        self._keys['j'] = pyray.KEY_J
-        self._keys['k'] = pyray.KEY_K
-        self._keys['l'] = pyray.KEY_L
+        self._keys['i'] = pyray.KEY_I # P2 - Up
+        self._keys['j'] = pyray.KEY_J # P2 - Left
+        self._keys['k'] = pyray.KEY_K # P2 - Down
+        self._keys['l'] = pyray.KEY_L # P2 - Right
 
-        self._keys['space'] = pyray.KEY_SPACE
+        self._keys['e'] = pyray.KEY_E # Player1 Boost
+        self._keys['o'] = pyray.KEY_O # Player2 Boost
+
+        self._keys['tab'] = pyray.KEY_TAB # ConsoleLog Help - Print Players
+        self._keys['space'] = pyray.KEY_SPACE # Reset Game
 
     def is_key_up(self, key):
         """Checks if the given key is currently up.
